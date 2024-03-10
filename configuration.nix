@@ -61,23 +61,10 @@
   };
 
   # Home manager
-  home-manager.users.ben = { pkgs, ... }: {
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
-    home.shellAliases = {
-      nv = "nvim";
-    };
-    home.packages = [
-      pkgs.htop
+  home-manager.users.ben = { ... }: {
+    imports = [
+      /home/ben/.home.nix
     ];
-    programs.bash.enable = true;
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-    };
-    home.stateVersion = "23.11";
   };
   home-manager.users.root = {
     home.sessionVariables = {
