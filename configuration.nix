@@ -43,6 +43,9 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
   # Configure keymap in X11
   services.xserver = {
     layout = "gb";
@@ -164,14 +167,26 @@
 
   environment.sessionVariables = {
     # If cursor is not visible, enable this option
-    # WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
     # Tell electron apps to use wayland
     NIXOS_OZONE_WL = "1";
   };
 
   hardware = {
-    opengl.enable = true;
-    nvidia.modesetting.enable = true;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+    nvidia = {
+      # See https://nixos.wiki/wiki/Nvidia
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
 
   # XDG portal
