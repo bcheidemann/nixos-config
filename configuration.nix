@@ -111,6 +111,32 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    # Bar for Hyprland
+    # pkgs.waybar
+    # May not be required
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+    )
+    # Notification daemon (X or Wayland)
+    pkgs.dunst
+    libnotify
+    # Wallpaper Daemon
+    # hyprpaper
+    # swaybg
+    # wpaperd
+    # mpvpaper
+    swww
+    # Terminal Emulator
+    kitty
+    # App Launcher
+    # wofi
+    # bemenu
+    # fuzzel
+    # tofi
+    rofi-wayland
+    # Network Manager Applet
+    pkgs.networkmanagerapplet
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -139,5 +165,41 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
+
+  # Window Manager
+  programs.hyprland = {
+    enable = true;
+    # Required for Nvidia GPUs
+    enableNvidiaPatches = true;
+    # Allows X applications to run
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    # If cursor is not visible, enable this option
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    # Tell electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+
+  # XDG portal
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+  # Enable sound with pipewire
+  sound.enable = true;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
 
 }
