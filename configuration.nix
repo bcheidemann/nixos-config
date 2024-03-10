@@ -101,6 +101,7 @@
   environment.systemPackages = with pkgs; [
     wget
     xdg-utils
+    pass-wayland
     pkgs.gnome.nautilus
     # Bar for Hyprland
     # pkgs.waybar
@@ -210,5 +211,8 @@
   programs.nix-ld.libraries = with pkgs; [
     pkgs.libz
   ];
+
+  # Enable flatpak
+  services.flatpak.enable = true;
 
 }
