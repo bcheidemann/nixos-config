@@ -76,6 +76,10 @@
     home.shellAliases = {
       nv = "nvim";
     };
+    home.packages = [
+      # Tools
+      pkgs.lazygit
+    ];
     programs.bash.enable = true;
     programs.neovim = {
       enable = true;
