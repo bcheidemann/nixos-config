@@ -95,6 +95,7 @@
       userEmail = "ben@heidemann.dev";
       extraConfig = {
         init.defaultBranch = "main";
+	credential.helper = "${pkgs.gh}/bin/gh auth git-credential";
       };
     };
     home.stateVersion = "23.11";
@@ -106,6 +107,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pkgs.gh
     pkgs.wev
     wget
     xdg-utils
