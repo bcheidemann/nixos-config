@@ -66,7 +66,7 @@
   # Home manager
   home-manager.users.ben = { ... }: {
     imports = [
-      /home/ben/.config/home-manager/configuration.nix
+      /home/ben/.config/home-manager/home.nix
     ];
   };
   home-manager.users.root = {
