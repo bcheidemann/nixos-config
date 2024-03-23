@@ -75,32 +75,9 @@
     ];
   };
   home-manager.users.root = {
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
-    home.shellAliases = {
-      nv = "nvim";
-    };
-    home.packages = [
-      # Tools
-      pkgs.lazygit
+    imports = [
+      /home/ben/.config/home-manager/root.nix
     ];
-    programs.bash.enable = true;
-    programs.neovim = {
-      enable = true;
-      defaultEditor = true;
-      vimAlias = true;
-    };
-    programs.git = {
-      enable = true;
-      userName = "Ben Heidemann";
-      userEmail = "ben@heidemann.dev";
-      extraConfig = {
-        init.defaultBranch = "main";
-	credential.helper = "${pkgs.gh}/bin/gh auth git-credential";
-      };
-    };
-    home.stateVersion = "23.11";
   };
 
   # Allow unfree packages
