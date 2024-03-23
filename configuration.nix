@@ -46,6 +46,8 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
