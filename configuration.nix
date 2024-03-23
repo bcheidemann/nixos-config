@@ -86,6 +86,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    pkgs.pkg-config
     pkgs.gcc
     pkgs.zellij
     pkgs.gh
@@ -120,6 +121,8 @@
     rofi-wayland
     # Network Manager Applet
     pkgs.networkmanagerapplet
+    # Libs
+    pkgs.glibc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
